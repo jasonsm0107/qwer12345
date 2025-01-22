@@ -1,18 +1,25 @@
 #pragma once
 #include <unordered_map>
-#include "../common/singleton.hpp"
-#include "../logging/logger.h"
+#include "../../logging/logger.h"
 
-class InputManager : public Singleton<InputManager> {
+class InputManager {
 public:
+    static InputManager& get() {
+        static InputManager instance;
+        return instance;
+    }
+
     void handleKeyPress(int keyCode);
     void handleKeyRelease(int keyCode);
     bool isKeyPressed(int keyCode) const;
 
+    // Delete copy constructor and assignment operator
+    InputManager(const InputManager&) = delete;
+    InputManager& operator=(const InputManager&) = delete;
+
 private:
-    friend class Singleton<InputManager>;
-    InputManager() = default;
+    InputManager() {} // Private constructor
 
     std::unordered_map<int, bool> keyStates;
-    Logger& logger = Logger::getInstance();
+    Logger& logger = Logger::get();
 };

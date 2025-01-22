@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="src\common\singleton.hpp" />
     <ClInclude Include="src\config\config_manager.h" />
     <ClInclude Include="src\core\core.h" />
     <ClInclude Include="src\core\input\input_manager.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="src\logging\log_entry.h" />
     <ClInclude Include="src\logging\log_level.h" />
     <ClInclude Include="src\resource\resource_manager.h" />
+    <ClInclude Include="src\state\state_manager.h" />
     <ClInclude Include="src\task\task_manager.h" />
     <ClInclude Include="src\utils\jni_bindings.h" />
     <ClInclude Include="src\utils\jni_utils.h" />
@@ -165,9 +167,11 @@
     </ClCompile>
     <ClCompile Include="src\config\config_manager.cpp" />
     <ClCompile Include="src\core\core.cpp" />
+    <ClCompile Include="src\core\input\input_manager.cpp" />
     <ClCompile Include="src\event\event_handler.cpp" />
     <ClCompile Include="src\logging\logger.cpp" />
     <ClCompile Include="src\resource\resource_manager.cpp" />
+    <ClCompile Include="src\state\state_manager.cpp" />
     <ClCompile Include="src\task\task_manager.cpp" />
     <ClCompile Include="src\utils\jni_bindings.cpp" />
     <ClCompile Include="src\utils\jni_utils.cpp" />

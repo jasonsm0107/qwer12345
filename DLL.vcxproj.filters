@@ -54,6 +54,12 @@
     <ClInclude Include="src\core\input\input_manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="src\common\singleton.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\state\state_manager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -84,6 +90,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\logging\logger.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\input\input_manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\state\state_manager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

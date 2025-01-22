@@ -1,24 +1,27 @@
 #pragma once
 #include <jni.h>
 #include <memory>
-#include <string>
+#include "../logging/logger.h"
+#include "state/state_manager.h"
+#include "input/input_manager.h"
 #include "../config/config_manager.h"
 #include "../resource/resource_manager.h"
-#include "../logging/logger.h"
 
 class PixelmonUtilsCore {
 private:
     static std::unique_ptr<PixelmonUtilsCore> instance;
-    JavaVM* jvm;
-    bool initialized;
+    bool initialized = false;
+    JavaVM* jvm = nullptr;
 
+    // Core components
+    std::unique_ptr<Logger> logger;
     std::unique_ptr<ConfigManager> configManager;
     std::unique_ptr<ResourceManager> resourceManager;
-    std::unique_ptr<Logger> logger;
-
-    PixelmonUtilsCore() : jvm(nullptr), initialized(false) {}
 
 public:
+    PixelmonUtilsCore() = default;
+    ~PixelmonUtilsCore() = default;
+
     static PixelmonUtilsCore& getInstance() {
         if (!instance) {
             instance = std::unique_ptr<PixelmonUtilsCore>(new PixelmonUtilsCore());
@@ -28,9 +31,27 @@ public:
 
     bool initialize(JNIEnv* env);
     void cleanup();
-    bool isInitialized() const { return initialized; }
 
+    // Core getters
+    Logger* getLogger() { return logger.get(); }
     ConfigManager* getConfigManager() { return configManager.get(); }
     ResourceManager* getResourceManager() { return resourceManager.get(); }
-    Logger* getLogger() { return logger.get(); }
+    StateManager& getStateManager() { return StateManager::getInstance(); }
+    InputManager& getInputManager() { return InputManager::getInstance(); }
+
+    // JNI related
+    JavaVM* getJavaVM() const { return jvm; }
+    JNIEnv* getJNIEnv() const;
+
+    // State checks
+    bool isInitialized() const { return initialized; }
+
+    // Delete copy constructor and assignment operator
+    PixelmonUtilsCore(const PixelmonUtilsCore&) = delete;
+    PixelmonUtilsCore& operator=(const PixelmonUtilsCore&) = delete;
+
+private:
+    bool initializeJNI(JNIEnv* env);
+    bool initializeComponents(JNIEnv* env);
+    void cleanupComponents();
 };
