@@ -4,7 +4,7 @@
 #include <string>
 #include "../config/config_manager.h"
 #include "../resource/resource_manager.h"
-#include "../utils/logger.h"
+#include "../logging/logger.h"
 
 class PixelmonUtilsCore {
 private:
